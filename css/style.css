@@ -164,6 +164,19 @@ h6 {
 
 .top-header__logo {
   display: inline-block;
+  position: relative;
+  z-index: 5;
+  bottom: 25px;
+  width: 170px;
+}
+
+.top-header__logo img {
+  max-width: 100%;
+}
+
+.top-header__logo__contacts {
+  display: inline-block;
+  z-index: 5;
 }
 
 .menu__list {
@@ -208,11 +221,6 @@ h6 {
 
 .contacts-header__column {
   padding: 0 30px;
-  border-left: 1px solid #fff;
-}
-
-.contacts-header__column:first-child {
-  border: 0;
 }
 
 .contacts-header__item_icon {
@@ -234,7 +242,7 @@ h6 {
   white-space: nowrap;
 }
 
-.bottom-header__container {
+.bottom-header__row {
   height: 63px;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -264,6 +272,10 @@ h6 {
 
 .actions-header li {
   margin: 0px 54px 0px 0px;
+}
+
+.actions-header li:last-child {
+  margin: 0;
 }
 
 .actions-header__item {
@@ -307,9 +319,6 @@ h6 {
 
 .info-header__column {
   padding: 0px 54px 0px 0px;
-  /*@media (max-width: $maxWidthContainer+px) {
-            margin: 0px 30 / $maxWidthContainer * 100vw 0px 0px;
-        }*/
 }
 
 .info-header__column:last-child {
@@ -348,12 +357,12 @@ h6 {
 
 .info-header__cart span {
   padding: 0 11px;
-  border-radius: 20px;
-  line-height: 20px;
+  border-radius: 18px;
+  line-height: 18px;
   background-color: #f68038;
   position: absolute;
   right: 0;
-  font-size: 14px;
+  font-size: 12px;
   font-weight: 700;
   color: #fff;
   -webkit-transform: translate(30%, 0px);
@@ -370,9 +379,22 @@ h6 {
 }
 
 @media (min-width: 991.98px) {
+  .menu__link {
+    padding: 0;
+    font-size: 20px;
+  }
+
   .menu__link:hover {
     border-radius: 20px;
     background-color: #068292;
+  }
+
+  .contacts-header__column {
+    border-left: 1px solid #fff;
+  }
+
+  .contacts-header__column:first-child {
+    border: 0;
   }
 
   .actions-header__item:hover {
@@ -387,6 +409,10 @@ h6 {
 }
 
 @media (max-width: 1152px) {
+  .menu__list {
+    grid-template-columns: 90px 110px 150px;
+  }
+
   .menu__link {
     padding: 5px 15px;
   }
@@ -402,6 +428,10 @@ h6 {
 
   .contacts-header__phone {
     font-size: 16px;
+  }
+
+  .bottom-header__row {
+    padding: 0 10px;
   }
 
   .actions-header__item {
@@ -431,24 +461,54 @@ h6 {
 
 @media (max-width: 991.98px) {
   .menu__body {
-    display: none;
+    opacity: 0;
     position: fixed;
     height: 100%;
     width: 100%;
+    visibility: hidden;
     top: 0;
     left: 0;
     overflow: auto;
     z-index: 2;
-    padding: 70px 20px 30px 20px;
-    background-color: #068292;
+    padding: 120px 20px 30px 20px;
+    -webkit-transition: all 0.3s ease 0s;
+    -o-transition: all 0.3s ease 0s;
+    transition: all 0.3s ease 0s;
+    background-color: #fff;
+  }
+
+  .menu__body::before {
+    content: '';
+    position: fixed;
+    width: 100%;
+    height: 105px;
+    top: 0;
+    left: 0;
+    z-index: 3;
+    background-color: #17abbe;
   }
 
   .menu__body._active {
-    display: block;
+    opacity: 1;
+    visibility: visible;
   }
 
   .menu__body.lock {
     overflow: hidden;
+  }
+
+  .menu__list {
+    display: block;
+  }
+
+  .menu__list li {
+    margin: 0 0 20px 0;
+  }
+
+  .menu__link {
+    padding: 0;
+    font-size: 20px;
+    color: #000;
   }
 
   .icon-menu {
@@ -507,8 +567,12 @@ h6 {
             justify-content: flex-end;
   }
 
-  .contacts-header__column:last-child {
+  .contacts-header__item_second-phone {
     display: none;
+  }
+
+  .bottom-header__row {
+    padding: 0;
   }
 
   .actions-header__item {
@@ -521,7 +585,21 @@ h6 {
   }
 }
 
+@media (max-width: 991.98px) and (max-width: 767.98px) {
+  .menu__body {
+    padding: 90px 20px 30px 20px;
+  }
+
+  .menu__body::before {
+    height: 70px;
+  }
+}
+
 @media (max-width: 767.98px) {
+  ._container {
+    padding: 0 10px;
+  }
+
   .header {
     background: url("../img/bg-header.jpg") 0 -20px no-repeat;
   }
@@ -530,7 +608,16 @@ h6 {
     height: 70px;
   }
 
+  .top-header__column_logo {
+    -ms-flex-item-align: start;
+        align-self: flex-start;
+    -webkit-box-flex: 0;
+        -ms-flex: 0 0 80px;
+            flex: 0 0 80px;
+  }
+
   .top-header__logo {
+    bottom: 0px;
     width: 100px;
   }
 
@@ -540,11 +627,18 @@ h6 {
 }
 
 @media (max-width: 640px) {
+  .contacts-header {
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+  }
+
   .contacts-header__column {
     padding: 0;
   }
 
   .contacts-header__item_icon {
+    padding: 0;
     background: none;
   }
 
@@ -557,8 +651,15 @@ h6 {
     width: 24px;
     height: 24px;
     font-size: 0;
-    display: inline-block;
-    vertical-align: middle;
+    display: block;
+    margin: 0 20px 0 0;
+  }
+
+  .actions-header {
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+    margin: 0 0 15px 0;
   }
 }
 
